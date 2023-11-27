@@ -9,10 +9,17 @@ public class Movement : MonoBehaviour
     [SerializeField] float yMovement;
     [SerializeField] public const int SPEED = 15;
     [SerializeField] bool isFacingRight = true;
+
+    public GameObject snowball;
+
+    public float movement = 10f;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        if(rigid == null){
+        if (rigid == null)
+        {
             rigid = GetComponent<Rigidbody2D>();
         }
     }
@@ -25,20 +32,34 @@ public class Movement : MonoBehaviour
         /*if(Input.GetButtonDown("Jump")){
             jumpPressed = true;
         }*/
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
     // potentially called many times per frame, best for physics
-    void FixedUpdate(){
-        rigid.velocity = new Vector2 (xMovement * SPEED, yMovement * SPEED);
-        if (xMovement < 0 && isFacingRight || xMovement > 0 && !isFacingRight){
+    void FixedUpdate()
+    {
+        rigid.velocity = new Vector2(xMovement * SPEED, yMovement * SPEED);
+        if (xMovement < 0 && isFacingRight || xMovement > 0 && !isFacingRight)
+        {
             Flip();
         }
-        
+
     }
 
-    void Flip(){
-        transform.Rotate(0,180,0);
+    void Flip()
+    {
+        transform.Rotate(0, 180, 0);
+        movement*=-1;
         isFacingRight = !isFacingRight;
+    }
+
+    void Shoot()
+    {
+        GameObject snowballObject = Instantiate(snowball, transform.position, Quaternion.identity);
+        snowballObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movement, 0f);
     }
 
 }
