@@ -10,6 +10,10 @@ public class Movement : MonoBehaviour
     [SerializeField] public const int SPEED = 15;
     [SerializeField] bool isFacingRight = true;
 
+    [SerializeField] const float JUMPFORCE = 500.0f;
+    [SerializeField] bool jumpPressed = false;
+    [SerializeField] bool isGrounded = false;
+
     public GameObject snowball;
 
     public float movement = 10f;
@@ -28,10 +32,10 @@ public class Movement : MonoBehaviour
     void Update()
     {
         xMovement = Input.GetAxis("Horizontal");
-        yMovement = Input.GetAxis("Vertical");
-        /*if(Input.GetButtonDown("Jump")){
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
             jumpPressed = true;
-        }*/
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
@@ -41,18 +45,36 @@ public class Movement : MonoBehaviour
     // potentially called many times per frame, best for physics
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(xMovement * SPEED, yMovement * SPEED);
+        rigid.velocity = new Vector2(xMovement * SPEED, rigid.velocity.y);
         if (xMovement < 0 && isFacingRight || xMovement > 0 && !isFacingRight)
         {
             Flip();
         }
-
+        if (jumpPressed && isGrounded)
+            Jump();
+        else
+        {
+            if (isGrounded)
+            {
+                // if (movement > 0 || movement < 0)
+                //     animator.SetInteger("motion", RUN);
+                // else if (movement == 0)
+                //     animator.SetInteger("motion", IDLE);
+            }
+        }
     }
-
+    void Jump()
+    {
+        //animator.SetInteger("motion", JUMP);
+        rigid.velocity = new Vector2(rigid.velocity.x, 0);
+        rigid.AddForce(new Vector2(0, JUMPFORCE));
+        jumpPressed = false;
+        isGrounded = false;
+    }
     void Flip()
     {
         transform.Rotate(0, 180, 0);
-        movement*=-1;
+        movement *= -1;
         isFacingRight = !isFacingRight;
     }
 
@@ -60,6 +82,16 @@ public class Movement : MonoBehaviour
     {
         GameObject snowballObject = Instantiate(snowball, transform.position, Quaternion.identity);
         snowballObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movement, 0f);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+            jumpPressed = false;
+            //animator.SetInteger("motion", IDLE);
+        }
     }
 
 }

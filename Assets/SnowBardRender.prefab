@@ -103,6 +103,8 @@ MonoBehaviour:
   xMovement: 0
   yMovement: 0
   isFacingRight: 1
+  jumpPressed: 0
+  isGrounded: 0
   snowball: {fileID: 8920369451882682502, guid: 71f8e6244c9279c4d904c7e495e2b95e, type: 3}
   movement: 10
 --- !u!50 &8425052508134168016
@@ -119,8 +121,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_AngularDrag: 0.5
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,7 +133,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1505927838004839554
 BoxCollider2D:
   m_ObjectHideFlags: 0

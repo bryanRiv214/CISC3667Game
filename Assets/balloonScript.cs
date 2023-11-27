@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 
 public class balloonScript : MonoBehaviour
 {
@@ -12,6 +14,16 @@ public class balloonScript : MonoBehaviour
     [SerializeField] public float SPEED;
 
     [SerializeField] new AudioSource audio;
+    [SerializeField] float growInterval = 2f;
+
+    [SerializeField] GameObject controller;
+
+    [SerializeField] Vector2 scale;
+
+    [SerializeField] int level;
+
+
+
 
     // Start is called before the first frame update
 
@@ -25,19 +37,27 @@ public class balloonScript : MonoBehaviour
         {
             audio = GetComponent<AudioSource>();
         }
+        if (controller == null)
+        {
+            controller = GameObject.FindGameObjectWithTag("GameController");
+        }
+        level = SceneManager.GetActiveScene().buildIndex - 1;
+
         position = (Vector2)transform.position + Vector2.up;
+        InvokeRepeating("GrowObject", 5f, growInterval);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         // adding SPEED to position, updating positon
-        
+
         position = transform.position;
         position.y += (SPEED * Time.deltaTime);
         transform.position = position;
 
-        if (position.y > initPosition.y+5 || position.y < initPosition.y-5)
+        if (position.y > initPosition.y + 5 || position.y < initPosition.y - 5)
         {
             SPEED *= -1;
             Flip();
@@ -53,17 +73,47 @@ public class balloonScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "snowball")
         {
+            if (scale.x <= .16)
+            {
+                System.Console.WriteLine("15");
+                controller.GetComponent<Scorekeeper>().AddPoints(10);
+            }
+            else if (scale.x <= .25)
+            {
+                controller.GetComponent<Scorekeeper>().AddPoints(5);
+            }
+            else
+            {
+                controller.GetComponent<Scorekeeper>().AddPoints(1);
+            }
             AudioSource.PlayClipAtPoint(audio.clip, transform.position);
 
             Destroy(gameObject);
             Destroy(collision.gameObject);
-
+            SceneManager.LoadScene(level + 2); //level is already 1 less than the index (e.g. 1 instead of 2)
 
         }
+    }
 
+    void GrowObject()
+    {
+        // Grow by 10% each time
+        float growAmount = 1.1f;
 
+        // Get current scale
+        scale = transform.localScale;
 
+        // Scale up on each axis 
+        scale.x *= growAmount;
+        scale.y *= growAmount;
 
-
+        // Apply new scale
+        transform.localScale = scale;
+        if (scale.x > .3)
+        {
+SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            gameObject.SetActive(false);
+            return;
+        }
     }
 }
