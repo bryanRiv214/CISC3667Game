@@ -14,6 +14,11 @@ public class Movement : MonoBehaviour
     [SerializeField] bool jumpPressed = false;
     [SerializeField] bool isGrounded = false;
 
+    [SerializeField] Animator animator;
+
+    const int IDLE = 0;
+    const int RUN = 1;
+
     public GameObject snowball;
 
     public float movement = 10f;
@@ -26,6 +31,8 @@ public class Movement : MonoBehaviour
         {
             rigid = GetComponent<Rigidbody2D>();
         }
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,16 +59,12 @@ public class Movement : MonoBehaviour
         }
         if (jumpPressed && isGrounded)
             Jump();
-        else
-        {
-            if (isGrounded)
-            {
-                // if (movement > 0 || movement < 0)
-                //     animator.SetInteger("motion", RUN);
-                // else if (movement == 0)
-                //     animator.SetInteger("motion", IDLE);
-            }
-        }
+
+        if (xMovement > 0 || xMovement < 0)
+            animator.SetInteger("motion", RUN);
+        else if (xMovement == 0)
+            animator.SetInteger("motion", IDLE);
+
     }
     void Jump()
     {

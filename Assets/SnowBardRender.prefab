@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 601977152393693903}
   - component: {fileID: 8425052508134168016}
   - component: {fileID: 1505927838004839554}
+  - component: {fileID: -8409540533930321560}
   m_Layer: 0
   m_Name: SnowBardRender
   m_TagString: Player
@@ -105,6 +106,7 @@ MonoBehaviour:
   isFacingRight: 1
   jumpPressed: 0
   isGrounded: 0
+  animator: {fileID: 0}
   snowball: {fileID: 8920369451882682502, guid: 71f8e6244c9279c4d904c7e495e2b95e, type: 3}
   movement: 10
 --- !u!50 &8425052508134168016
@@ -177,5 +179,26 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.32, y: 1.95}
+  m_Size: {x: 2.32, y: 2.485517}
   m_EdgeRadius: 0
+--- !u!95 &-8409540533930321560
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731659341429166600}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 351d4d291f87dc04da36a22547de2c0a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

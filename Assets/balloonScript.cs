@@ -122,6 +122,7 @@ public class balloonScript : MonoBehaviour
         transform.localScale = scale;
         if (scale.x > .3)
         {
+            controller.GetComponent<Scorekeeper>().AddPoints(-5);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameObject.SetActive(false);
             return;

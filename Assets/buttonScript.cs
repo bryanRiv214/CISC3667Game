@@ -42,6 +42,7 @@ public class buttonScript : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
+        PersistentData.Instance.SetScore(0);
     }
 
     public void Settings()

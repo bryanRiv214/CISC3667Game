@@ -932,6 +932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b813bdf536de0942b44af0016e6d0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMode: []
+  resumeMode: []
 --- !u!114 &888811984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,6 +2407,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734194940}
   m_CullTransparentMesh: 1
+--- !u!1 &1786590671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1786590673}
+  - component: {fileID: 1786590672}
+  m_Layer: 0
+  m_Name: HighScores
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1786590672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786590671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df238cfb9e05f5d4d80d53e583325d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  playerScore: 0
+  nameTexts:
+  - {fileID: 1451957939}
+  - {fileID: 79697349}
+  - {fileID: 707553238}
+  - {fileID: 1414462232}
+  - {fileID: 1734194942}
+  scoreTexts:
+  - {fileID: 1713966441}
+  - {fileID: 168727123}
+  - {fileID: 1286595042}
+  - {fileID: 677720590}
+  - {fileID: 1592153524}
+--- !u!4 &1786590673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786590671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 413.11542, y: 191.12779, z: -0.67229104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2414,3 +2474,4 @@ SceneRoots:
   - {fileID: 888811987}
   - {fileID: 1367057761}
   - {fileID: 1235136651}
+  - {fileID: 1786590673}

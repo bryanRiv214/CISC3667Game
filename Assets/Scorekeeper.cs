@@ -14,15 +14,12 @@ public class Scorekeeper : MonoBehaviour
     [SerializeField] int level;
     [SerializeField] int scoreThresholdForThisLevel;
 
-    public const int SCORE_THRESHOLD = 10;
-
 
     // Start is called before the first frame update
     void Start()
     {
         level = SceneManager.GetActiveScene().buildIndex - 1;
         score = PersistentData.Instance.GetScore();
-        //scoreThresholdForThisLevel = SCORE_THRESHOLD * level;
         DisplayName();
         DisplayScene();
         DisplayScore();
@@ -48,7 +45,7 @@ public class Scorekeeper : MonoBehaviour
 
     private void DisplayName()
     {
-        //nameText.SetText("Hi, " + PersistentData.Instance.GetName() + "!");
+        nameText.SetText("Player: " + PersistentData.Instance.GetName());
     }
 
     private void DisplayScore()
