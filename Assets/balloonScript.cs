@@ -51,6 +51,11 @@ public class balloonScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    void FixedUpdate()
+    {
         // adding SPEED to position, updating positon
 
         position = transform.position;
@@ -73,6 +78,7 @@ public class balloonScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "snowball")
         {
+            float delay = GetComponent<AudioSource>().clip.length;
             if (scale.x <= .16)
             {
                 System.Console.WriteLine("15");
@@ -87,12 +93,17 @@ public class balloonScript : MonoBehaviour
                 controller.GetComponent<Scorekeeper>().AddPoints(1);
             }
             AudioSource.PlayClipAtPoint(audio.clip, transform.position);
-
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
-            SceneManager.LoadScene(level + 2); //level is already 1 less than the index (e.g. 1 instead of 2)
-
+            Invoke("LoadNextScene", delay);
         }
+    }
+
+    void LoadNextScene()
+    {
+        print("Next Scene Index: " + SceneManager.GetActiveScene().buildIndex + 1);
+
+        // Load next scene 
+        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void GrowObject()
@@ -111,7 +122,7 @@ public class balloonScript : MonoBehaviour
         transform.localScale = scale;
         if (scale.x > .3)
         {
-SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             gameObject.SetActive(false);
             return;
         }

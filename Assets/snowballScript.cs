@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-         if (collision.gameObject.tag == "Ground"){
+         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Gnar" || collision.gameObject.tag == "teemo"){
             gameObject.SetActive(false);
          }
         

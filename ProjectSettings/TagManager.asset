@@ -7,6 +7,10 @@ TagManager:
   - teemo
   - snowball
   - Ground
+  - Gnar
+  - BGMusic
+  - ShowInResume
+  - ShowInPause
   layers:
   - Default
   - TransparentFX
